@@ -1,0 +1,178 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    background: #f5f1ea;
+    color: #2d2a26;
+    font-family: "Segoe UI", sans-serif;
+    margin-bottom: 80px;
+}
+
+/* Hero Section */
+
+.lab-hero {
+    text-align: center;
+    padding: 40px 0 28px;
+}
+
+.lab-hero h1 {
+    font-size: 44px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: #5b3a29;
+}
+
+.lab-hero p {
+    font-size: 18px;
+    color: #6b5b4d;
+}
+
+/* Information Panel */
+
+.info-panel {
+    background: #fff8e7;
+    border: 1px solid #e7d7b1;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin: 24px 0;
+}
+
+/* Flow List */
+
+.flow-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.flow-list li {
+    background: white;
+    border: 1px solid #e5ddd5;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 14px 18px;
+    transition: 0.2s ease;
+}
+
+.flow-list li:hover {
+    transform: translateY(-2px);
+}
+
+/* Page Header */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.page-title {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #5b3a29;
+}
+
+.page-description {
+    color: #6b5b4d;
+    font-size: 17px;
+}
+
+/* Statistics */
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    margin: 28px 0;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid #eadfce;
+    border-radius: 16px;
+    text-align: center;
+    padding: 24px;
+    box-shadow: 0 8px 18px rgba(60, 40, 20, 0.06);
+}
+
+.stat-number {
+    font-size: 34px;
+    font-weight: 800;
+    color: #8b5e3c;
+}
+
+.stat-label {
+    color: #6b5b4d;
+    margin-top: 6px;
+}
+
+/* Status Badges */
+
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.badge-success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge-warning {
+    background: #fff7d6;
+    color: #92400e;
+}
+
+.badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Detail Layout */
+
+.detail-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+/* Side Cards */
+
+.side-card {
+    background: white;
+    border: 1px solid #eadfce;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(60, 40, 20, 0.04);
+}
+
+.side-card.warning {
+    background: #fff8e1;
+    border-color: #facc15;
+}
+
+.side-card.info {
+    background: #f5f3ff;
+    border-color: #c4b5fd;
+}
+
+.side-card.success {
+    background: #ecfdf5;
+    border-color: #86efac;
+}
+
+/* Footer Fix */
+
+.footer {
+    position: relative;
+    width: 100%;
+}

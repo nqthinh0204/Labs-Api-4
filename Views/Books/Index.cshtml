@@ -1,0 +1,82 @@
+@model List<BookListItemViewModel>
+
+@{
+    ViewData["Title"] = "Book Catalog";
+    var totalItems = Model.Count;
+}
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title">Book Catalog</h2>
+
+        <p class="page-description">
+            This page displays the bookstore catalog and inventory status.
+        </p>
+    </div>
+
+    <div>
+        <a class="btn btn-primary" href="/Books/Stats">
+            View Inventory Statistics
+        </a>
+    </div>
+</div>
+
+<div class="info-panel">
+    <strong>Total Books:</strong> @totalItems
+</div>
+
+@if (Model.Count == 0)
+{
+    <p>No books available in the system.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped align-middle">
+        <thead>
+            <tr>
+                <th>ISBN</th>
+                <th>Book Title</th>
+                <th>Category</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Inventory Value</th>
+                <th>Status</th>
+                <th>Detail</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Isbn</td>
+                    <td>@item.Title</td>
+                    <td>@item.Category</td>
+                    <td>@item.Author</td>
+                    <td>@item.PriceText</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.InventoryValueText</td>
+
+                    <td>
+                        <span class="@item.StockStatusClass">
+                            @item.StockStatus
+                        </span>
+                    </td>
+
+                    <td>
+                        <a href="/Books/Detail/@item.Id">
+                            View
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<p class="mt-4">
+    <a class="btn btn-light" href="/">
+        Back to Home
+    </a>
+</p>

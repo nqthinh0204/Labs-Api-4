@@ -1,0 +1,45 @@
+@model List<SaleHistoryViewModel>
+@{
+    ViewData["Title"] = "Lịch Sử Bán Hàng";
+}
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title">Lịch Sử Bán Hàng</h2>
+        <p class="page-description">Dữ liệu chỉ đọc — dùng AsNoTracking với Include SaleItems và Book</p>
+    </div>
+    <a class="btn" asp-controller="Sales" asp-action="Create">Bán Sách Mới</a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="info-box">Chưa có hóa đơn nào.</div>
+}
+else
+{
+    @foreach (var sale in Model)
+    {
+        <div class="product-card" style="margin-bottom:20px">
+            <p class="product-meta">
+                <strong>Hóa đơn #@sale.Id</strong> —
+                @sale.CreatedAt.ToString("dd/MM/yyyy HH:mm") —
+                Khách: <strong>@sale.CustomerName</strong>
+            </p>
+            <table class="table" style="margin:8px 0">
+                <thead><tr><th>Sách</th><th>SL</th><th>Đơn giá</th><th>Thành tiền</th></tr></thead>
+                <tbody>
+                    @foreach (var item in sale.Items)
+                    {
+                        <tr>
+                            <td>@item.BookTitle</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.UnitPrice.ToString("N0") VNĐ</td>
+                            <td>@item.Subtotal.ToString("N0") VNĐ</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p class="product-price" style="text-align:right">Tổng: @sale.TotalAmount.ToString("N0") VNĐ</p>
+        </div>
+    }
+}

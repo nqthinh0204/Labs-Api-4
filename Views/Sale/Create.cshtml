@@ -1,0 +1,65 @@
+@model SaleCreateViewModel
+@{
+    ViewData["Title"] = "Bán Sách";
+}
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title">Bán Sách</h2>
+        <p class="page-description">Transaction: tạo Sale, SaleItem và trừ Quantity. Nếu lỗi → Rollback toàn bộ</p>
+    </div>
+    <a class="btn btn-light" asp-controller="Books" asp-action="Index">Quay lại</a>
+</div>
+
+<div class="form-layout">
+    <form class="form-box" asp-controller="Sales" asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="All" class="validation-summary-errors"></div>
+
+        <div class="form-group">
+            <label asp-for="CustomerName">Tên Khách Hàng</label>
+            <input asp-for="CustomerName" class="form-control" placeholder="Ví dụ: Nguyễn Văn A" />
+            <span asp-validation-for="CustomerName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BookId">Chọn Sách</label>
+            <select asp-for="BookId" class="form-control">
+                <option value="">-- Chọn sách --</option>
+                @foreach (var b in Model.AvailableBooks)
+                {
+                    <option value="@b.Id">@b.Title - @b.Price.ToString("N0") VNĐ (còn @b.Quantity)</option>
+                }
+            </select>
+            <span asp-validation-for="BookId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Quantity">Số Lượng</label>
+            <input asp-for="Quantity" class="form-control" type="number" min="1" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+        </div>
+
+        <button class="btn" type="submit">Tạo Hóa Đơn</button>
+        <a class="btn btn-secondary" asp-controller="Sales" asp-action="History">Lịch Sử</a>
+    </form>
+
+    <div class="info-box">
+        <h3>Luồng Transaction</h3>
+        <ol>
+            <li>Mở transaction</li>
+            <li>Kiểm tra tồn kho (dùng Tracking)</li>
+            <li>Nếu không đủ → return lỗi (không rollback vì chưa ghi gì)</li>
+            <li>Trừ Quantity của Book</li>
+            <li>Thêm Sale và SaleItem</li>
+            <li>SaveChanges</li>
+            <li>Commit transaction</li>
+            <li>Nếu có exception → Rollback</li>
+        </ol>
+        <p><strong>Test rollback:</strong> chọn số lượng lớn hơn tồn kho để thấy thông báo lỗi và không có dữ liệu bị thay đổi.</p>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

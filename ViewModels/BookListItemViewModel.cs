@@ -1,62 +1,14 @@
-namespace AspLab02.Mvc.ViewModels;
+namespace AspLab04.Mvc.ViewModels;
 
 public class BookListItemViewModel
 {
     public int Id { get; set; }
-
-    public string Isbn { get; set; } = "";
-
-    public string Title { get; set; } = "";
-
-    public string Category { get; set; } = "";
-
-    public string Author { get; set; } = "";
-
+    public string BookCode { get; set; } = string.Empty;
+    public string Title { get; set; } = string.Empty;
+    public string Author { get; set; } = string.Empty;
     public decimal Price { get; set; }
-
     public int Quantity { get; set; }
-
+    public string GenreName { get; set; } = string.Empty;
     public int MinStock { get; set; }
-
-    public string PriceText => $"{Price:N0} VND";
-
-    public decimal InventoryValue => Price * Quantity;
-
-    public string InventoryValueText => $"{InventoryValue:N0} VND";
-
-    public string StockStatus
-    {
-        get
-        {
-            if (Quantity <= 0)
-            {
-                return "Out of Stock";
-            }
-
-            if (Quantity <= MinStock)
-            {
-                return "Low Stock";
-            }
-
-            return "Available";
-        }
-    }
-
-    public string StockStatusClass
-    {
-        get
-        {
-            if (Quantity <= 0)
-            {
-                return "badge badge-danger";
-            }
-
-            if (Quantity <= MinStock)
-            {
-                return "badge badge-warning";
-            }
-
-            return "badge badge-success";
-        }
-    }
+    public bool IsLowStock { get; set; }
 }

@@ -1,121 +1,36 @@
-@model BookDetailViewModel
-
+@model BookListItemViewModel
 @{
-    ViewData["Title"] = "Book Detail";
+    ViewData["Title"] = Model.Title;
 }
 
 <div class="page-header">
     <div>
-        <h2 class="page-title">Book Detail</h2>
-
-        <p class="page-description">
-            Detailed information about the selected book in the bookstore.
-        </p>
+        <h2 class="page-title">@Model.Title</h2>
+        <p class="page-description">Chi tiết sách</p>
     </div>
-
-    <a class="btn btn-light" href="/Books">
-        Back to Catalog
-    </a>
+    <a class="btn btn-light" asp-controller="Books" asp-action="Index">Quay lại</a>
 </div>
 
-<div class="detail-layout">
-
-    <div>
-        <table class="table table-bordered">
-
-            <tr>
-                <th>ID</th>
-                <td>@Model.Id</td>
-            </tr>
-
-            <tr>
-                <th>ISBN</th>
-                <td>@Model.Isbn</td>
-            </tr>
-
-            <tr>
-                <th>Book Title</th>
-                <td>@Model.Title</td>
-            </tr>
-
-            <tr>
-                <th>Category</th>
-                <td>@Model.Category</td>
-            </tr>
-
-            <tr>
-                <th>Author</th>
-                <td>@Model.Author</td>
-            </tr>
-
-            <tr>
-                <th>Price</th>
-                <td>@Model.PriceText</td>
-            </tr>
-
-            <tr>
-                <th>Quantity</th>
-                <td>@Model.Quantity</td>
-            </tr>
-
-            <tr>
-                <th>Minimum Stock</th>
-                <td>@Model.MinStock</td>
-            </tr>
-
-            <tr>
-                <th>Inventory Value</th>
-                <td>@Model.InventoryValueText</td>
-            </tr>
-
-            <tr>
-                <th>Status</th>
-                <td>@Model.StockStatus</td>
-            </tr>
-
-            <tr>
-                <th>Restock Suggestion</th>
-                <td>@Model.RestockSuggestion</td>
-            </tr>
-
-            <tr>
-                <th>Last Updated</th>
-                <td>@Model.LastUpdatedText</td>
-            </tr>
-
-        </table>
+<div class="product-card" style="max-width:500px">
+    <p class="product-meta"><strong>Mã Sách:</strong> @Model.BookCode</p>
+    <p class="product-meta"><strong>Tác Giả:</strong> @Model.Author</p>
+    <p class="product-meta"><strong>Thể Loại:</strong> @Model.GenreName</p>
+    <p class="product-price">@Model.Price.ToString("N0") VNĐ</p>
+    <p class="product-meta"><strong>Tồn Kho:</strong>
+        @if (Model.Quantity == 0)
+        {
+            <span class="badge badge-danger">Hết hàng</span>
+        }
+        else if (Model.IsLowStock)
+        {
+            <span class="badge badge-warning">@Model.Quantity (tồn kho thấp)</span>
+        }
+        else
+        {
+            <span class="badge badge-success">@Model.Quantity</span>
+        }
+    </p>
+    <div class="card-actions">
+        <a class="btn" asp-controller="Sales" asp-action="Create">Bán Sách Này</a>
     </div>
-
-    <div>
-
-        <div class="side-card warning">
-            <h4>Inventory Status</h4>
-
-            <h3>@Model.StockStatus</h3>
-
-            <p>@Model.RestockSuggestion</p>
-        </div>
-
-        <div class="side-card info">
-            <h4>Current Inventory Value</h4>
-
-            <h3>@Model.InventoryValueText</h3>
-
-            <p>
-                Calculated based on book price and available quantity.
-            </p>
-        </div>
-
-        <div class="side-card success">
-            <h4>Last Updated</h4>
-
-            <h3>@Model.LastUpdatedText</h3>
-
-            <p>
-                Book information was recently updated.
-            </p>
-        </div>
-
-    </div>
-
 </div>

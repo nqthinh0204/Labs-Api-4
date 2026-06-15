@@ -1,42 +1,45 @@
 ﻿@{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Trang Chủ";
 }
 
-<div class="lab-hero">
-    <h1>Mini Bookstore Catalog MVC</h1>
-
-    <p>
-        This lab demonstrates how to build a basic ASP.NET Core MVC website
-        <br />
-        to manage and display a bookstore catalog and inventory status.
-    </p>
+<div class="page-header">
+    <div>
+        <h2 class="page-title">@ViewData["AppName"]</h2>
+        <p class="page-description">Hệ thống quản lý bán sách - Mini Bookstore Lab04</p>
+    </div>
 </div>
 
-<div class="info-panel">
-    <h4>Main Objectives of Lab02</h4>
-
-    <p>
-        Understand how Controller, ViewModel, and Razor Syntax
-        work together in ASP.NET Core MVC.
-    </p>
+<div class="info-box">
+    <strong>Liên hệ hỗ trợ:</strong> @ViewData["SupportEmail"]
 </div>
 
-<h3>MVC Processing Flow</h3>
-
-<ol class="flow-list">
-    <li>1. User sends a request to a URL.</li>
-
-    <li>2. Controller Action receives the request.</li>
-
-    <li>3. Controller calls Service to retrieve data.</li>
-
-    <li>4. Controller transforms data into ViewModel.</li>
-
-    <li>5. View uses Razor Syntax to render HTML for the browser.</li>
-</ol>
-
-<div class="text-center mt-4">
-    <a class="btn btn-primary btn-lg" href="/Books">
-        Go to Book Catalog
-    </a>
+<div class="product-grid">
+    <div class="product-card">
+        <h3>Danh Sách Sách</h3>
+        <p class="product-meta">Xem toàn bộ sách lấy từ database qua luồng Controller → Service → Repository → DbContext</p>
+        <div class="card-actions">
+            <a class="btn" asp-controller="Books" asp-action="Index">Xem Sách</a>
+        </div>
+    </div>
+    <div class="product-card">
+        <h3>Thể Loại</h3>
+        <p class="product-meta">Xem quan hệ One-to-Many: một thể loại có nhiều cuốn sách</p>
+        <div class="card-actions">
+            <a class="btn" asp-controller="Genres" asp-action="Index">Xem Thể Loại</a>
+        </div>
+    </div>
+    <div class="product-card">
+        <h3>Bán Sách</h3>
+        <p class="product-meta">Tạo hóa đơn bán sách với Transaction: ghi Sale, SaleItem và trừ Quantity</p>
+        <div class="card-actions">
+            <a class="btn" asp-controller="Sales" asp-action="Create">Bán Sách</a>
+        </div>
+    </div>
+    <div class="product-card">
+        <h3>Data Health</h3>
+        <p class="product-meta">Kiểm tra migration, seed data, Tracking và AsNoTracking</p>
+        <div class="card-actions">
+            <a class="btn" asp-controller="DataHealth" asp-action="Index">Kiểm Tra</a>
+        </div>
+    </div>
 </div>

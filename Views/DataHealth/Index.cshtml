@@ -1,0 +1,83 @@
+@model DataHealthViewModel
+@{
+    ViewData["Title"] = "Data Health";
+}
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title">Data Health</h2>
+        <p class="page-description">Kiểm tra database, migration, seed data, Tracking và AsNoTracking</p>
+    </div>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-number">@(Model.DatabaseConnected ? "✓" : "✗")</div>
+        <div class="stat-label">Database</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">@(Model.MigrationApplied ? "✓" : "✗")</div>
+        <div class="stat-label">Migration</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">@Model.GenreCount</div>
+        <div class="stat-label">Thể Loại</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">@Model.BookCount</div>
+        <div class="stat-label">Sách</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">@Model.SaleCount</div>
+        <div class="stat-label">Hóa Đơn</div>
+    </div>
+</div>
+
+<div class="product-grid" style="margin-top:24px">
+    <div class="product-card">
+        <h3>Options Pattern Config</h3>
+        <p class="product-meta"><strong>AppName:</strong> @Model.AppName</p>
+        <p class="product-meta"><strong>SupportEmail:</strong> @Model.SupportEmail</p>
+        <p class="product-meta"><strong>LowStockThreshold:</strong> @Model.LowStockThreshold</p>
+        <p class="product-meta">Đọc từ appsettings.json qua <code>IOptions&lt;AppSettings&gt;</code></p>
+    </div>
+
+    <div class="product-card">
+        <h3>Tracking Query</h3>
+        <p class="product-meta">Dùng cho nghiệp vụ cần cập nhật (ví dụ: trừ Quantity khi bán)</p>
+        <table class="table" style="margin-top:8px">
+            <thead><tr><th>Tên Sách</th><th>Tồn</th></tr></thead>
+            <tbody>
+                @foreach (var b in Model.TrackingBooks)
+                {
+                    <tr><td>@b.Title</td><td>@b.Quantity</td></tr>
+                }
+            </tbody>
+        </table>
+        <p class="product-meta" style="margin-top:8px">EF Core theo dõi entity → SaveChanges sẽ ghi thay đổi vào DB</p>
+    </div>
+
+    <div class="product-card">
+        <h3>AsNoTracking Query</h3>
+        <p class="product-meta">Dùng cho trang danh sách chỉ đọc — hiệu suất tốt hơn</p>
+        <table class="table" style="margin-top:8px">
+            <thead><tr><th>Tên Sách</th><th>Tồn</th></tr></thead>
+            <tbody>
+                @foreach (var b in Model.NoTrackingBooks)
+                {
+                    <tr><td>@b.Title</td><td>@b.Quantity</td></tr>
+                }
+            </tbody>
+        </table>
+        <p class="product-meta" style="margin-top:8px">EF Core không theo dõi → tiết kiệm bộ nhớ khi đọc nhiều bản ghi</p>
+    </div>
+</div>
+
+<div class="info-box" style="margin-top:24px">
+    <h3>Kiểm tra Transaction (Rollback)</h3>
+    <p>
+        Để test rollback: vào <a asp-controller="Sales" asp-action="Create">Bán Sách</a>
+        và nhập số lượng lớn hơn tồn kho của sách đó.
+        Hệ thống sẽ trả về thông báo lỗi và không có dữ liệu nào bị thay đổi (transaction bị rollback trước khi commit).
+    </p>
+</div>

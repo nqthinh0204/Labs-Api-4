@@ -1,0 +1,72 @@
+@model BookFilterViewModel
+@{
+    ViewData["Title"] = "Lọc Sách";
+}
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title">Lọc Sách</h2>
+        <p class="page-description">Lọc theo thể loại và khoảng giá — Repository dùng AsNoTracking cho kết quả chỉ đọc</p>
+    </div>
+</div>
+
+<div class="form-layout">
+    <form class="form-box" method="get" asp-controller="Books" asp-action="Filter">
+        <div class="form-group">
+            <label>Thể Loại</label>
+            <select name="genreId" class="form-control">
+                <option value="">-- Tất cả --</option>
+                @foreach (var g in Model.Genres)
+                {
+                    if (Model.GenreId == g.Id)
+                    {
+                        <option value="@g.Id" selected>@g.Name (@g.BookCount cuốn)</option>
+                    }
+                    else
+                    {
+                        <option value="@g.Id">@g.Name (@g.BookCount cuốn)</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Giá từ (VNĐ)</label>
+            <input type="number" name="minPrice" class="form-control" value="@Model.MinPrice" placeholder="Ví dụ: 50000" />
+        </div>
+        <div class="form-group">
+            <label>Giá đến (VNĐ)</label>
+            <input type="number" name="maxPrice" class="form-control" value="@Model.MaxPrice" placeholder="Ví dụ: 200000" />
+        </div>
+        <button type="submit" class="btn">Lọc</button>
+        <a class="btn btn-secondary" asp-controller="Books" asp-action="Filter">Reset</a>
+    </form>
+
+    <div>
+        <div class="info-box">
+            <strong>Kết quả:</strong> @Model.Books.Count cuốn sách
+            — Route: <code>/Books/Filter?genreId=1&minPrice=50000&maxPrice=200000</code>
+        </div>
+        <table class="table">
+            <thead>
+                <tr><th>Mã</th><th>Tên Sách</th><th>Thể Loại</th><th>Giá</th><th>Tồn</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var b in Model.Books)
+                {
+                    <tr>
+                        <td>@b.BookCode</td>
+                        <td>@b.Title</td>
+                        <td>@b.GenreName</td>
+                        <td>@b.Price.ToString("N0") VNĐ</td>
+                        <td>
+                            @if (b.IsLowStock)
+                            { <span class="badge badge-warning">@b.Quantity</span> }
+                            else
+                            { <span class="badge badge-success">@b.Quantity</span> }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

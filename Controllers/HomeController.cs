@@ -1,24 +1,22 @@
-using System.Diagnostics;
+using AspLab04.Mvc.Options;
 using Microsoft.AspNetCore.Mvc;
-using AspLab02.Mvc.Models;
+using Microsoft.Extensions.Options;
 
-namespace AspLab02.Mvc.Controllers;
+namespace BookstoreMvc.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly AppSettings _settings;
+
+    public HomeController(IOptions<AppSettings> options)
+    {
+        _settings = options.Value;
+    }
+
     public IActionResult Index()
     {
+        ViewData["AppName"] = _settings.AppName;
+        ViewData["SupportEmail"] = _settings.SupportEmail;
         return View();
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

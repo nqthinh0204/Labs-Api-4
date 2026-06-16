@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -53,6 +53,7 @@ namespace AspLab04.Mvc.Migrations
                     Publisher = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    MinStock = table.Column<int>(type: "INTEGER", nullable: false),
                     GenreId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -99,24 +100,25 @@ namespace AspLab04.Mvc.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Kỹ năng sống" },
-                    { 2, "Tiểu thuyết" },
-                    { 3, "Khoa học" },
-                    { 4, "Công nghệ" }
+                    { 1, "Programming" },
+                    { 2, "Science" },
+                    { 3, "Novel" },
+                    { 4, "Self Development" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Books",
-                columns: new[] { "Id", "Author", "BookCode", "GenreId", "Price", "Publisher", "Quantity", "Title" },
+                columns: new[] { "Id", "Author", "BookCode", "GenreId", "MinStock", "Price", "Publisher", "Quantity", "Title" },
                 values: new object[,]
                 {
-                    { 1, "Dale Carnegie", "BK-SKL-001", 1, 88000m, "NXB Tổng hợp TP.HCM", 25, "Đắc Nhân Tâm" },
-                    { 2, "Daniel Kahneman", "BK-SKL-002", 1, 120000m, "NXB Lao Động", 3, "Tư Duy Nhanh Và Chậm" },
-                    { 3, "Paulo Coelho", "BK-NOV-001", 2, 75000m, "NXB Hội Nhà Văn", 10, "Nhà Giả Kim" },
-                    { 4, "Yuval Noah Harari", "BK-NOV-002", 2, 175000m, "NXB Tri Thức", 2, "Sapiens: Lược Sử Loài Người" },
-                    { 5, "Stephen Hawking", "BK-SCI-001", 3, 120000m, "NXB Trẻ", 0, "Lược Sử Thời Gian" },
-                    { 6, "Robert C. Martin", "BK-TECH-001", 4, 220000m, "NXB Lao Động", 8, "Clean Code" },
-                    { 7, "David Thomas", "BK-TECH-002", 4, 195000m, "NXB Lao Động", 4, "The Pragmatic Programmer" }
+                    { 1, "Robert C. Martin", "BK001", 1, 3, 250000m, "Prentice Hall", 10, "Clean Code" },
+                    { 2, "Andrew Hunt", "BK002", 1, 3, 280000m, "Addison Wesley", 8, "The Pragmatic Programmer" },
+                    { 3, "Erich Gamma", "BK003", 1, 2, 350000m, "Addison Wesley", 5, "Design Patterns" },
+                    { 4, "Stephen Hawking", "BK004", 2, 2, 180000m, "Bantam Books", 7, "A Brief History of Time" },
+                    { 5, "Yuval Noah Harari", "BK005", 2, 2, 220000m, "Harper", 4, "Sapiens" },
+                    { 6, "J.K. Rowling", "BK006", 3, 5, 200000m, "Bloomsbury", 15, "Harry Potter" },
+                    { 7, "James Clear", "BK007", 4, 3, 230000m, "Avery", 6, "Atomic Habits" },
+                    { 8, "Stephen Covey", "BK008", 4, 3, 210000m, "Free Press", 3, "The 7 Habits" }
                 });
 
             migrationBuilder.CreateIndex(

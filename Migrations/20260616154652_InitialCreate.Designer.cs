@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspLab04.Mvc.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260615011835_InitialCreate")]
+    [Migration("20260616154652_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace AspLab04.Mvc.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.9");
 
-            modelBuilder.Entity("BookstoreMvc.Models.Book", b =>
+            modelBuilder.Entity("AspLab04.Mvc.Models.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -37,6 +37,9 @@ namespace AspLab04.Mvc.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("GenreId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MinStock")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Price")
@@ -65,83 +68,102 @@ namespace AspLab04.Mvc.Migrations
                         new
                         {
                             Id = 1,
-                            Author = "Dale Carnegie",
-                            BookCode = "BK-SKL-001",
-                            GenreId = 1,
-                            Price = 88000m,
-                            Publisher = "NXB Tổng hợp TP.HCM",
-                            Quantity = 25,
-                            Title = "Đắc Nhân Tâm"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Author = "Daniel Kahneman",
-                            BookCode = "BK-SKL-002",
-                            GenreId = 1,
-                            Price = 120000m,
-                            Publisher = "NXB Lao Động",
-                            Quantity = 3,
-                            Title = "Tư Duy Nhanh Và Chậm"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Author = "Paulo Coelho",
-                            BookCode = "BK-NOV-001",
-                            GenreId = 2,
-                            Price = 75000m,
-                            Publisher = "NXB Hội Nhà Văn",
-                            Quantity = 10,
-                            Title = "Nhà Giả Kim"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Author = "Yuval Noah Harari",
-                            BookCode = "BK-NOV-002",
-                            GenreId = 2,
-                            Price = 175000m,
-                            Publisher = "NXB Tri Thức",
-                            Quantity = 2,
-                            Title = "Sapiens: Lược Sử Loài Người"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Author = "Stephen Hawking",
-                            BookCode = "BK-SCI-001",
-                            GenreId = 3,
-                            Price = 120000m,
-                            Publisher = "NXB Trẻ",
-                            Quantity = 0,
-                            Title = "Lược Sử Thời Gian"
-                        },
-                        new
-                        {
-                            Id = 6,
                             Author = "Robert C. Martin",
-                            BookCode = "BK-TECH-001",
-                            GenreId = 4,
-                            Price = 220000m,
-                            Publisher = "NXB Lao Động",
-                            Quantity = 8,
+                            BookCode = "BK001",
+                            GenreId = 1,
+                            MinStock = 3,
+                            Price = 250000m,
+                            Publisher = "Prentice Hall",
+                            Quantity = 10,
                             Title = "Clean Code"
                         },
                         new
                         {
-                            Id = 7,
-                            Author = "David Thomas",
-                            BookCode = "BK-TECH-002",
-                            GenreId = 4,
-                            Price = 195000m,
-                            Publisher = "NXB Lao Động",
-                            Quantity = 4,
+                            Id = 2,
+                            Author = "Andrew Hunt",
+                            BookCode = "BK002",
+                            GenreId = 1,
+                            MinStock = 3,
+                            Price = 280000m,
+                            Publisher = "Addison Wesley",
+                            Quantity = 8,
                             Title = "The Pragmatic Programmer"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Author = "Erich Gamma",
+                            BookCode = "BK003",
+                            GenreId = 1,
+                            MinStock = 2,
+                            Price = 350000m,
+                            Publisher = "Addison Wesley",
+                            Quantity = 5,
+                            Title = "Design Patterns"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Author = "Stephen Hawking",
+                            BookCode = "BK004",
+                            GenreId = 2,
+                            MinStock = 2,
+                            Price = 180000m,
+                            Publisher = "Bantam Books",
+                            Quantity = 7,
+                            Title = "A Brief History of Time"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Author = "Yuval Noah Harari",
+                            BookCode = "BK005",
+                            GenreId = 2,
+                            MinStock = 2,
+                            Price = 220000m,
+                            Publisher = "Harper",
+                            Quantity = 4,
+                            Title = "Sapiens"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Author = "J.K. Rowling",
+                            BookCode = "BK006",
+                            GenreId = 3,
+                            MinStock = 5,
+                            Price = 200000m,
+                            Publisher = "Bloomsbury",
+                            Quantity = 15,
+                            Title = "Harry Potter"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Author = "James Clear",
+                            BookCode = "BK007",
+                            GenreId = 4,
+                            MinStock = 3,
+                            Price = 230000m,
+                            Publisher = "Avery",
+                            Quantity = 6,
+                            Title = "Atomic Habits"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Author = "Stephen Covey",
+                            BookCode = "BK008",
+                            GenreId = 4,
+                            MinStock = 3,
+                            Price = 210000m,
+                            Publisher = "Free Press",
+                            Quantity = 3,
+                            Title = "The 7 Habits"
                         });
                 });
 
-            modelBuilder.Entity("BookstoreMvc.Models.Genre", b =>
+            modelBuilder.Entity("AspLab04.Mvc.Models.Genre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -160,26 +182,26 @@ namespace AspLab04.Mvc.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Kỹ năng sống"
+                            Name = "Programming"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Tiểu thuyết"
+                            Name = "Science"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Khoa học"
+                            Name = "Novel"
                         },
                         new
                         {
                             Id = 4,
-                            Name = "Công nghệ"
+                            Name = "Self Development"
                         });
                 });
 
-            modelBuilder.Entity("BookstoreMvc.Models.Sale", b =>
+            modelBuilder.Entity("AspLab04.Mvc.Models.Sale", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -201,7 +223,7 @@ namespace AspLab04.Mvc.Migrations
                     b.ToTable("Sales", (string)null);
                 });
 
-            modelBuilder.Entity("BookstoreMvc.Models.SaleItem", b =>
+            modelBuilder.Entity("AspLab04.Mvc.Models.SaleItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -228,9 +250,9 @@ namespace AspLab04.Mvc.Migrations
                     b.ToTable("SaleItems", (string)null);
                 });
 
-            modelBuilder.Entity("BookstoreMvc.Models.Book", b =>
+            modelBuilder.Entity("AspLab04.Mvc.Models.Book", b =>
                 {
-                    b.HasOne("BookstoreMvc.Models.Genre", "Genre")
+                    b.HasOne("AspLab04.Mvc.Models.Genre", "Genre")
                         .WithMany("Books")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -239,15 +261,15 @@ namespace AspLab04.Mvc.Migrations
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("BookstoreMvc.Models.SaleItem", b =>
+            modelBuilder.Entity("AspLab04.Mvc.Models.SaleItem", b =>
                 {
-                    b.HasOne("BookstoreMvc.Models.Book", "Book")
+                    b.HasOne("AspLab04.Mvc.Models.Book", "Book")
                         .WithMany("SaleItems")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BookstoreMvc.Models.Sale", "Sale")
+                    b.HasOne("AspLab04.Mvc.Models.Sale", "Sale")
                         .WithMany("SaleItems")
                         .HasForeignKey("SaleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -258,17 +280,17 @@ namespace AspLab04.Mvc.Migrations
                     b.Navigation("Sale");
                 });
 
-            modelBuilder.Entity("BookstoreMvc.Models.Book", b =>
+            modelBuilder.Entity("AspLab04.Mvc.Models.Book", b =>
                 {
                     b.Navigation("SaleItems");
                 });
 
-            modelBuilder.Entity("BookstoreMvc.Models.Genre", b =>
+            modelBuilder.Entity("AspLab04.Mvc.Models.Genre", b =>
                 {
                     b.Navigation("Books");
                 });
 
-            modelBuilder.Entity("BookstoreMvc.Models.Sale", b =>
+            modelBuilder.Entity("AspLab04.Mvc.Models.Sale", b =>
                 {
                     b.Navigation("SaleItems");
                 });

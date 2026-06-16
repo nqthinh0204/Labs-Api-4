@@ -58,21 +58,116 @@ public class AppDbContext : DbContext
 
         // Seed Genres
         modelBuilder.Entity<Genre>().HasData(
-            new Genre { Id = 1, Name = "Kỹ năng sống" },
-            new Genre { Id = 2, Name = "Tiểu thuyết" },
-            new Genre { Id = 3, Name = "Khoa học" },
-            new Genre { Id = 4, Name = "Công nghệ" }
+            new Genre { Id = 1, Name = "Programming" },
+            new Genre { Id = 2, Name = "Science" },
+            new Genre { Id = 3, Name = "Novel" },
+            new Genre { Id = 4, Name = "Self Development" }
         );
 
-        // Seed Books
         modelBuilder.Entity<Book>().HasData(
-            new Book { Id = 1, BookCode = "BK-SKL-001", Title = "Đắc Nhân Tâm", Author = "Dale Carnegie", Publisher = "NXB Tổng hợp TP.HCM", Price = 88000, Quantity = 25, MinStock = 5, GenreId = 1 },
-            new Book { Id = 2, BookCode = "BK-SKL-002", Title = "Tư Duy Nhanh Và Chậm", Author = "Daniel Kahneman", Publisher = "NXB Lao Động", Price = 120000, Quantity = 3, MinStock = 5, GenreId = 1 },
-            new Book { Id = 3, BookCode = "BK-NOV-001", Title = "Nhà Giả Kim", Author = "Paulo Coelho", Publisher = "NXB Hội Nhà Văn", Price = 75000, Quantity = 10, MinStock = 3, GenreId = 2 },
-            new Book { Id = 4, BookCode = "BK-NOV-002", Title = "Sapiens: Lược Sử Loài Người", Author = "Yuval Noah Harari", Publisher = "NXB Tri Thức", Price = 175000, Quantity = 2, MinStock = 3, GenreId = 2 },
-            new Book { Id = 5, BookCode = "BK-SCI-001", Title = "Lược Sử Thời Gian", Author = "Stephen Hawking", Publisher = "NXB Trẻ", Price = 120000, Quantity = 0, MinStock = 3, GenreId = 3 },
-            new Book { Id = 6, BookCode = "BK-TECH-001", Title = "Clean Code", Author = "Robert C. Martin", Publisher = "NXB Lao Động", Price = 220000, Quantity = 8, MinStock = 3, GenreId = 4 },
-            new Book { Id = 7, BookCode = "BK-TECH-002", Title = "The Pragmatic Programmer", Author = "David Thomas", Publisher = "NXB Lao Động", Price = 195000, Quantity = 4, MinStock = 3, GenreId = 4 }
+            new Book
+            {
+                Id = 1,
+                BookCode = "BK001",
+                Title = "Clean Code",
+                Author = "Robert C. Martin",
+                Publisher = "Prentice Hall",
+                Price = 250000,
+                Quantity = 10,
+                MinStock = 3,
+                GenreId = 1
+            },
+
+            new Book
+            {
+                Id = 2,
+                BookCode = "BK002",
+                Title = "The Pragmatic Programmer",
+                Author = "Andrew Hunt",
+                Publisher = "Addison Wesley",
+                Price = 280000,
+                Quantity = 8,
+                MinStock = 3,
+                GenreId = 1
+            },
+
+            new Book
+            {
+                Id = 3,
+                BookCode = "BK003",
+                Title = "Design Patterns",
+                Author = "Erich Gamma",
+                Publisher = "Addison Wesley",
+                Price = 350000,
+                Quantity = 5,
+                MinStock = 2,
+                GenreId = 1
+            },
+
+            new Book
+            {
+                Id = 4,
+                BookCode = "BK004",
+                Title = "A Brief History of Time",
+                Author = "Stephen Hawking",
+                Publisher = "Bantam Books",
+                Price = 180000,
+                Quantity = 7,
+                MinStock = 2,
+                GenreId = 2
+            },
+
+            new Book
+            {
+                Id = 5,
+                BookCode = "BK005",
+                Title = "Sapiens",
+                Author = "Yuval Noah Harari",
+                Publisher = "Harper",
+                Price = 220000,
+                Quantity = 4,
+                MinStock = 2,
+                GenreId = 2
+            },
+
+            new Book
+            {
+                Id = 6,
+                BookCode = "BK006",
+                Title = "Harry Potter",
+                Author = "J.K. Rowling",
+                Publisher = "Bloomsbury",
+                Price = 200000,
+                Quantity = 15,
+                MinStock = 5,
+                GenreId = 3
+            },
+
+            new Book
+            {
+                Id = 7,
+                BookCode = "BK007",
+                Title = "Atomic Habits",
+                Author = "James Clear",
+                Publisher = "Avery",
+                Price = 230000,
+                Quantity = 6,
+                MinStock = 3,
+                GenreId = 4
+            },
+
+            new Book
+            {
+                Id = 8,
+                BookCode = "BK008",
+                Title = "The 7 Habits",
+                Author = "Stephen Covey",
+                Publisher = "Free Press",
+                Price = 210000,
+                Quantity = 3,
+                MinStock = 3,
+                GenreId = 4
+            }
         );
     }
 }

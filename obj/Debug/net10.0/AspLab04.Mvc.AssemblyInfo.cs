@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AspLab04.Mvc")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+725e44e8b2f1a0269c044c66b13612a73ca8aa7d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4364bc0c6c800a7e8ff85fd74620a3b9096d57d2")]
 [assembly: System.Reflection.AssemblyProductAttribute("AspLab04.Mvc")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AspLab04.Mvc")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
